@@ -5,6 +5,7 @@ export interface User {
   phone: string;
   roles: UserRole[];
   createdAt: Date;
+  type: 'admin' | 'partner' | 'member';
 }
 
 export interface UserRole {
