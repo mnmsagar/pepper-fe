@@ -32,10 +32,6 @@ const Header: React.FC<HeaderProps> = ({
 
   const availableRoles = user?.type === activeRole ? [user] : [];
 
-  console.log("availableRoles---skd->", availableRoles);
-  //   console.log("activeRole---->", activeRole);
-  //   return;
-
   return (
     <>
       <header className="bg-white dark:bg-dark-bg-primary border-b border-neutral-200 dark:border-dark-border-primary px-4 sm:px-6 py-3 sm:py-4 sticky top-0 z-40 transition-colors duration-200">
