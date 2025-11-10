@@ -5,11 +5,11 @@ export interface User {
   phone: string;
   roles: UserRole[];
   createdAt: Date;
-  type: 'admin' | 'partner' | 'member';
+  type: "admin" | "partner" | "member";
 }
 
 export interface UserRole {
-  role: 'admin' | 'admin_employee' | 'partner' | 'partner_employee' | 'member';
+  role: "admin" | "admin_employee" | "partner" | "partner_employee" | "member";
   userId: string;
 }
 
@@ -18,7 +18,7 @@ export interface Partner {
   userId: string;
   companyName: string;
   walletBalance: number;
-  kycStatus: 'pending' | 'approved' | 'rejected';
+  kycStatus: "pending" | "approved" | "rejected";
   totalCoinsDistributed: number;
   createdAt: Date;
 }
@@ -38,7 +38,7 @@ export interface CoinTransaction {
   fromUserId?: string;
   toUserId: string;
   amount: number;
-  type: 'earn' | 'redeem' | 'purchase' | 'reward';
+  type: "earn" | "redeem" | "purchase" | "reward";
   description: string;
   partnerId?: string;
   schemeId?: string;
@@ -50,7 +50,7 @@ export interface RewardItem {
   title: string;
   description: string;
   coinsCost: number;
-  category: 'cashback' | 'trip' | 'gift' | 'voucher';
+  category: "cashback" | "trip" | "gift" | "voucher";
   isActive: boolean;
   imageUrl?: string;
 }
@@ -60,27 +60,28 @@ export interface Redemption {
   userId: string;
   rewardId: string;
   coinsCost: number;
-  status: 'pending' | 'approved' | 'completed' | 'rejected';
+  status: "pending" | "approved" | "completed" | "rejected";
   createdAt: Date;
   processedAt?: Date;
 }
 
 export interface RewardScheme {
-   id: string;
-  partner_id: string;
+  id: number;
+  userId: number; // partner_id → userId for clarity
   name: string;
   description: string;
   conditions: string;
-  coins_reward: number;
-  is_active: boolean;
-  category: 'purchase' | 'volume' | 'loyalty' | 'special';
-  minimum_purchase?: number;
-  valid_until?: string;
-  usage_count: number;
-  max_usage?: number;
-  metadata: any;
-  created_at: string;
-  updated_at: string;
+  coinReward: number;
+  category: "purchase" | "volume" | "loyalty" | "special";
+  isActivated: boolean;
+  minimumPurchase: number;
+  maxRedemptions: number;
+  startDate: string;
+  endDate: string;
+  usageCount: number;
+  metadata?: any;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface AuthContextType {

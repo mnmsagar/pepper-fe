@@ -18,7 +18,6 @@ import RewardDistribution from "./RewardDistribution";
 import PartnerAnalytics from "./PartnerAnalytics";
 import SchemeManagement from "./SchemeManagement";
 import { useAuth } from "../../contexts/AuthContext";
-import { useData } from "../../contexts/DataContext";
 import Header from "../common/Header";
 import { useDashboard } from "../../hooks/partner/useDashboard";
 
@@ -30,57 +29,57 @@ const PartnerDashboard: React.FC = () => {
 
   const { data, isLoading, error } = useDashboard();
 
-  const partnerData = {
-    partners: [
-      {
-        id: 201,
-        user_id: 60,
-        company_name: "TechWave Solutions",
-        wallet_balance: 12500,
-        kyc_status: "Verified",
-        total_coins_distributed: 85000,
-        created_at: "2024-11-20T09:30:00Z",
-      },
-    ],
-    transactions: [
-      {
-        id: 9001,
-        partner_id: 201,
-        type: "Distribution",
-        amount: 5000,
-        description: "Coins distributed to members for referral program",
-        created_at: "2025-02-15T11:00:00Z",
-      },
-      {
-        id: 9002,
-        partner_id: 201,
-        type: "Top-Up",
-        amount: 10000,
-        description: "Wallet recharged by admin",
-        created_at: "2025-03-10T14:30:00Z",
-      },
-    ],
-    schemes: [
-      {
-        id: 3001,
-        partner_id: 201,
-        name: "New Year Bonus Scheme",
-        description: "Extra 20% coins for new members joining before Jan 2025.",
-        start_date: "2024-12-25T00:00:00Z",
-        end_date: "2025-01-10T23:59:59Z",
-        status: "Completed",
-      },
-      {
-        id: 3002,
-        partner_id: 201,
-        name: "Loyalty Booster",
-        description: "10% bonus coins for existing users completing all tasks.",
-        start_date: "2025-03-01T00:00:00Z",
-        end_date: "2025-04-15T23:59:59Z",
-        status: "Active",
-      },
-    ],
-  };
+  // const partnerData = {
+  //   partners: [
+  //     {
+  //       id: 201,
+  //       user_id: 60,
+  //       company_name: "TechWave Solutions",
+  //       wallet_balance: 12500,
+  //       kyc_status: "Verified",
+  //       total_coins_distributed: 85000,
+  //       created_at: "2024-11-20T09:30:00Z",
+  //     },
+  //   ],
+  //   transactions: [
+  //     {
+  //       id: 9001,
+  //       partner_id: 201,
+  //       type: "Distribution",
+  //       amount: 5000,
+  //       description: "Coins distributed to members for referral program",
+  //       created_at: "2025-02-15T11:00:00Z",
+  //     },
+  //     {
+  //       id: 9002,
+  //       partner_id: 201,
+  //       type: "Top-Up",
+  //       amount: 10000,
+  //       description: "Wallet recharged by admin",
+  //       created_at: "2025-03-10T14:30:00Z",
+  //     },
+  //   ],
+  //   schemes: [
+  //     {
+  //       id: 3001,
+  //       partner_id: 201,
+  //       name: "New Year Bonus Scheme",
+  //       description: "Extra 20% coins for new members joining before Jan 2025.",
+  //       start_date: "2024-12-25T00:00:00Z",
+  //       end_date: "2025-01-10T23:59:59Z",
+  //       status: "Completed",
+  //     },
+  //     {
+  //       id: 3002,
+  //       partner_id: 201,
+  //       name: "Loyalty Booster",
+  //       description: "10% bonus coins for existing users completing all tasks.",
+  //       start_date: "2025-03-01T00:00:00Z",
+  //       end_date: "2025-04-15T23:59:59Z",
+  //       status: "Active",
+  //     },
+  //   ],
+  // };
 
   // const { partners, transactions, schemes } = useData();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -109,24 +108,24 @@ const PartnerDashboard: React.FC = () => {
   const { partners, transactions, schemes } = partnerData;
 
   const currentPartner = partners.find((p) => p.user_id === user?.id);
-  const partnerTransactions = transactions.filter(
-    (t) => t.partner_id === currentPartner?.id
-  );
-  const partnerSchemes = schemes.filter(
-    (s) => s.partner_id === currentPartner?.id
-  );
+  // const partnerTransactions = transactions.filter(
+  //   (t) => t.partner_id === currentPartner?.id
+  // );
+  // const partnerSchemes = schemes.filter(
+  //   (s) => s.partner_id === currentPartner?.id
+  // );
 
-  const mappedPartner = partners
-    ? {
-        id: 200,
-        userId: user?.id || 0,
-        companyName: "iCubes",
-        walletBalance: 100,
-        kycStatus: true,
-        totalCoinsDistributed: 2000,
-        createdAt: new Date(),
-      }
-    : null;
+  // const mappedPartner = partners
+  //   ? {
+  //       id: 200,
+  //       userId: user?.id || 0,
+  //       companyName: "iCubes",
+  //       walletBalance: 100,
+  //       kycStatus: true,
+  //       totalCoinsDistributed: 2000,
+  //       createdAt: new Date(),
+  //     }
+  //   : null;
 
   const isActivePath = (path: string) => {
     if (path === "/partner" && location.pathname === "/partner") return true;
@@ -260,7 +259,7 @@ const PartnerDashboard: React.FC = () => {
                 <div className="space-y-6">
                   {/* Stats Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-                    {mappedPartner && (
+                    {data?.data?.walletBalance && (
                       <StatsCard
                         title="Wallet Balance"
                         value={data?.data?.walletBalance}
@@ -268,7 +267,7 @@ const PartnerDashboard: React.FC = () => {
                         color="success"
                       />
                     )}
-                    {mappedPartner && (
+                    {data?.data?.totalCoinsDistributed && (
                       <StatsCard
                         title="Coins Distributed"
                         value={data?.data?.totalCoinsDistributed}
