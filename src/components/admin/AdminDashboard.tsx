@@ -28,8 +28,6 @@ const AdminDashboard: React.FC = () => {
   const { data, isLoading, error } = useDashboard();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  console.log("Admin Dashboard Data:", data);
-
   const isActivePath = (path: string) => {
     if (path === "/admin" && location.pathname === "/admin") return true;
     return location.pathname.startsWith(path) && path !== "/admin";
@@ -211,30 +209,42 @@ const AdminDashboard: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                     <StatsCard
                       title="Total Partners"
-                      value={totalPartners}
+                      value={data?.data?.totalPartners?.thisMonth}
                       icon={Building}
-                      trend={{ value: 12, isPositive: true }}
+                      trend={{
+                        value: data?.data?.totalPartners?.value,
+                        isPositive: data?.data?.totalPartners?.isPositive,
+                      }}
                       color="primary"
                     />
                     <StatsCard
                       title="Active Members"
-                      value={totalMembers}
+                      value={data?.data?.totalMembers?.thisMonth}
                       icon={Users}
-                      trend={{ value: 8, isPositive: true }}
+                      trend={{
+                        value: data?.data?.totalMembers?.value,
+                        isPositive: data?.data?.totalMembers?.isPositive,
+                      }}
                       color="success"
                     />
                     <StatsCard
                       title="Coins in Circulation"
-                      value={totalCoinsInCirculation.toLocaleString()}
+                      value={data?.data?.coinsInCirculation?.thisMonth}
                       icon={Coins}
-                      trend={{ value: 25, isPositive: true }}
+                      trend={{
+                        value: data?.data?.coinsInCirculation?.value,
+                        isPositive: data?.data?.coinsInCirculation?.isPositive,
+                      }}
                       color="secondary"
                     />
                     <StatsCard
                       title="Total Transactions"
-                      value={totalTransactions}
+                      value={data?.data?.totalTransactions?.thisMonth}
                       icon={DollarSign}
-                      trend={{ value: 15, isPositive: true }}
+                      trend={{
+                        value: data?.data?.totalTransactions?.value,
+                        isPositive: data?.data?.totalTransactions?.isPositive,
+                      }}
                       color="warning"
                     />
                   </div>
@@ -252,6 +262,12 @@ const AdminDashboard: React.FC = () => {
                         </span>
                       </div>
                       <div className="space-y-3">
+                        {data?.data?.pendingApprovals?.length > 0 &&
+                          data.data.pendingApprovals.map((approval: any) => (
+                            <div key={approval.id}>
+                              {/* your JSX for each approval */}
+                            </div>
+                          ))}
                         {/* {data.redemptions
                           .filter((r) => r.status === "pending")
                           .map((redemption) => (
@@ -290,6 +306,12 @@ const AdminDashboard: React.FC = () => {
                       <h3 className="text-lg font-semibold text-neutral-900 dark:text-dark-text-primary mb-4">
                         Top Performing Partners
                       </h3>
+                      {data?.data?.topPerfomingPartners?.length > 0 &&
+                        data.data.pendingApprovals.map((approval: any) => (
+                          <div key={approval.id}>
+                            {/* your JSX for each approval */}
+                          </div>
+                        ))}
                       {/* <div className="space-y-3">
                         {data.partners
                           .sort(
