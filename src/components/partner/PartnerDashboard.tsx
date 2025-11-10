@@ -263,7 +263,7 @@ const PartnerDashboard: React.FC = () => {
                     {mappedPartner && (
                       <StatsCard
                         title="Wallet Balance"
-                        value={`₹${mappedPartner.walletBalance.toLocaleString()}`}
+                        value={data?.data?.walletBalance}
                         icon={Wallet}
                         color="success"
                       />
@@ -271,20 +271,20 @@ const PartnerDashboard: React.FC = () => {
                     {mappedPartner && (
                       <StatsCard
                         title="Coins Distributed"
-                        value={mappedPartner.totalCoinsDistributed.toLocaleString()}
+                        value={data?.data?.totalCoinsDistributed}
                         icon={Gift}
                         color="secondary"
                       />
                     )}
                     <StatsCard
                       title="Active Schemes"
-                      value={activeSchemes}
+                      value={data?.data?.activeSchemes}
                       icon={Target}
                       color="primary"
                     />
                     <StatsCard
                       title="Total Transactions"
-                      value={partnerTransactions.length}
+                      value={data?.data?.totalTransactions}
                       icon={History}
                       color="warning"
                     />
@@ -355,17 +355,18 @@ const PartnerDashboard: React.FC = () => {
                         Recent Transactions
                       </h3>
                       <div className="space-y-3">
-                        {partnerTransactions.slice(0, 5).map((transaction) => (
+                        {data?.data?.recentTransactions?.map((transaction) => (
                           <div
                             key={transaction.id}
                             className="flex items-center justify-between p-3 bg-neutral-50 dark:bg-dark-bg-tertiary rounded-lg"
                           >
                             <div className="flex-1 min-w-0">
                               <p className="font-medium text-neutral-900 dark:text-dark-text-primary truncate">
-                                {transaction.description}
+                                {transaction.availableBalance}
                               </p>
                               <p className="text-sm text-neutral-600 dark:text-dark-text-secondary">
-                                {transaction.created_at}
+                                {/* {transaction.date} */}
+                                Available Balance
                               </p>
                             </div>
                             <div className="text-right ml-4">
@@ -373,12 +374,12 @@ const PartnerDashboard: React.FC = () => {
                                 {transaction.amount} coins
                               </p>
                               <p className="text-sm text-neutral-500 dark:text-dark-text-tertiary capitalize">
-                                {transaction.transaction_type}
+                                {transaction.type}
                               </p>
                             </div>
                           </div>
                         ))}
-                        {partnerTransactions.length === 0 && (
+                        {data?.data?.recentTransactions === 0 && (
                           <p className="text-neutral-500 dark:text-dark-text-tertiary text-center py-4">
                             No transactions yet
                           </p>
@@ -400,33 +401,30 @@ const PartnerDashboard: React.FC = () => {
                         </Link>
                       </div>
                       <div className="space-y-3">
-                        {partnerSchemes
-                          .sort((a, b) => b.usage_count - a.usage_count)
-                          .slice(0, 3)
-                          .map((scheme) => (
-                            <div
-                              key={scheme.id}
-                              className="flex items-center justify-between p-3 bg-neutral-50 dark:bg-dark-bg-tertiary rounded-lg"
-                            >
-                              <div className="flex-1 min-w-0">
-                                <p className="font-medium text-neutral-900 dark:text-dark-text-primary truncate">
-                                  {scheme.name}
-                                </p>
-                                <p className="text-sm text-neutral-600 dark:text-dark-text-secondary">
-                                  {scheme.coins_reward} coins per use
-                                </p>
-                              </div>
-                              <div className="text-right ml-4">
-                                <p className="font-semibold text-primary-600 dark:text-primary-400">
-                                  {scheme.usage_count}
-                                </p>
-                                <p className="text-sm text-neutral-500 dark:text-dark-text-tertiary">
-                                  uses
-                                </p>
-                              </div>
+                        {data?.data?.topPerformingSchemes?.map((scheme) => (
+                          <div
+                            key={scheme.id}
+                            className="flex items-center justify-between p-3 bg-neutral-50 dark:bg-dark-bg-tertiary rounded-lg"
+                          >
+                            <div className="flex-1 min-w-0">
+                              <p className="font-medium text-neutral-900 dark:text-dark-text-primary truncate">
+                                {scheme?.name}
+                              </p>
+                              <p className="text-sm text-neutral-600 dark:text-dark-text-secondary">
+                                {scheme?.coinsDistributed} coins per use
+                              </p>
                             </div>
-                          ))}
-                        {partnerSchemes.length === 0 && (
+                            <div className="text-right ml-4">
+                              <p className="font-semibold text-primary-600 dark:text-primary-400">
+                                {scheme?.numberOfUsers}
+                              </p>
+                              <p className="text-sm text-neutral-500 dark:text-dark-text-tertiary">
+                                uses
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                        {data?.data?.topPerformingSchemes.length === 0 && (
                           <div className="text-center py-4">
                             <p className="text-neutral-500 dark:text-dark-text-tertiary mb-2">
                               No schemes created yet
