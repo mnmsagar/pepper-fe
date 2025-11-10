@@ -5,3 +5,8 @@ export const adminDashboardData = async () => {
   console.log("API Response:", response);
   return response.data;
 };
+
+export const partnerDashboardData = async () => {
+  const response = await apiClient.get("/partner/dashboard");
+  return response.data;
+}

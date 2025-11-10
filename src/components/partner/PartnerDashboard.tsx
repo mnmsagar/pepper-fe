@@ -20,12 +20,15 @@ import SchemeManagement from "./SchemeManagement";
 import { useAuth } from "../../contexts/AuthContext";
 import { useData } from "../../contexts/DataContext";
 import Header from "../common/Header";
+import { useDashboard } from "../../hooks/partner/useDashboard";
 
 const PartnerDashboard: React.FC = () => {
   const location = useLocation();
   const { user } = useAuth();
 
   console.log("user", user);
+
+  const { data, isLoading, error } = useDashboard();
 
   const partnerData = {
     partners: [
