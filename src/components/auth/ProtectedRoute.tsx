@@ -27,7 +27,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requiredRole 
 
   // Check if user has required role
   if (requiredRole) {
-    const userRoleType = currentUserRole.role;
+    const userRoleType = currentUserRole;
     
     // Map roles for routing
     const roleRouteMap: { [key: string]: string } = {
