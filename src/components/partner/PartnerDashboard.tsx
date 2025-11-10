@@ -19,6 +19,7 @@ import PartnerAnalytics from "./PartnerAnalytics";
 import SchemeManagement from "./SchemeManagement";
 import { useAuth } from "../../contexts/AuthContext";
 import { useData } from "../../contexts/DataContext";
+import Header from "../common/Header";
 
 const PartnerDashboard: React.FC = () => {
   const location = useLocation();
@@ -157,12 +158,12 @@ const PartnerDashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-dark-bg-primary transition-colors duration-200">
-      {/* <Header 
-        title="Partner Dashboard" 
-        subtitle={`Welcome back, ${currentPartner.company_name}`}
+      <Header
+        title="Partner Dashboard"
+        subtitle={`Welcome back, ${currentPartner?.company_name}`}
         onMenuToggle={() => setSidebarOpen(true)}
         showMenuButton={true}
-      /> */}
+      />
 
       <div className="flex">
         {/* Mobile Sidebar Overlay */}
@@ -256,18 +257,22 @@ const PartnerDashboard: React.FC = () => {
                 <div className="space-y-6">
                   {/* Stats Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-                    {mappedPartner && <StatsCard
-                      title="Wallet Balance"
-                      value={`₹${mappedPartner.walletBalance.toLocaleString()}`}
-                      icon={Wallet}
-                      color="success"
-                    />}
-                    {mappedPartner && <StatsCard
-                      title="Coins Distributed"
-                      value={mappedPartner.totalCoinsDistributed.toLocaleString()}
-                      icon={Gift}
-                      color="secondary"
-                    />}
+                    {mappedPartner && (
+                      <StatsCard
+                        title="Wallet Balance"
+                        value={`₹${mappedPartner.walletBalance.toLocaleString()}`}
+                        icon={Wallet}
+                        color="success"
+                      />
+                    )}
+                    {mappedPartner && (
+                      <StatsCard
+                        title="Coins Distributed"
+                        value={mappedPartner.totalCoinsDistributed.toLocaleString()}
+                        icon={Gift}
+                        color="secondary"
+                      />
+                    )}
                     <StatsCard
                       title="Active Schemes"
                       value={activeSchemes}

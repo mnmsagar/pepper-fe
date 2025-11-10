@@ -19,6 +19,7 @@ import RewardsManagement from "./RewardsManagement";
 import Analytics from "./Analytics";
 import { useData } from "../../contexts/DataContext";
 import { useDashboard } from "../../hooks/admin/useDahsboard";
+import Header from "../common/Header";
 
 const AdminDashboard: React.FC = () => {
   const location = useLocation();
@@ -46,8 +47,7 @@ const AdminDashboard: React.FC = () => {
   // Calculate stats
   const totalPartners = 0;
   const totalMembers = 0;
-  const totalCoinsInCirculation =
-    0;
+  const totalCoinsInCirculation = 0;
   const totalTransactions = 0;
   const pendingRedemptions = 0;
 
@@ -55,12 +55,12 @@ const AdminDashboard: React.FC = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-neutral-50 dark:bg-dark-bg-primary transition-colors duration-200">
-        {/* <Header
+        <Header
           title="Admin Dashboard"
           subtitle="Loading..."
           onMenuToggle={() => setSidebarOpen(true)}
           showMenuButton={true}
-        /> */}
+        />
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <div className="w-8 h-8 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
@@ -77,12 +77,12 @@ const AdminDashboard: React.FC = () => {
   if (error) {
     return (
       <div className="min-h-screen bg-neutral-50 dark:bg-dark-bg-primary transition-colors duration-200">
-        {/* <Header
+        <Header
           title="Admin Dashboard"
           subtitle="Error loading data"
           onMenuToggle={() => setSidebarOpen(true)}
           showMenuButton={true}
-        /> */}
+        />
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <div className="w-12 h-12 bg-error-100 dark:bg-error-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -94,7 +94,7 @@ const AdminDashboard: React.FC = () => {
               Failed to load data
             </h3>
             <p className="text-neutral-600 dark:text-dark-text-secondary mb-4">
-              {error}
+              {/* {error} */}
             </p>
             <button
               onClick={() => window.location.reload()}
@@ -110,12 +110,12 @@ const AdminDashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-dark-bg-primary transition-colors duration-200">
-      {/* <Header
+      <Header
         title="Admin Dashboard"
         subtitle="Manage your loyalty platform ecosystem"
         onMenuToggle={() => setSidebarOpen(true)}
         showMenuButton={true}
-      /> */}
+      />
 
       <div className="flex">
         {/* Mobile Sidebar Overlay */}

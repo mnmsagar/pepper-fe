@@ -17,6 +17,7 @@ import TransactionHistory from "./TransactionHistory";
 import RedemptionHistory from "./RedemptionHistory";
 import { useAuth } from "../../contexts/AuthContext";
 import { useData } from "../../contexts/DataContext";
+import Header from "../common/Header";
 
 const MemberPortal: React.FC = () => {
   const location = useLocation();
@@ -130,12 +131,12 @@ const MemberPortal: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-dark-bg-primary transition-colors duration-200">
-      {/* <Header 
-        title="Member Portal" 
+      <Header
+        title="Member Portal"
         subtitle={`Welcome back, ${user?.name}`}
         onMenuToggle={() => setSidebarOpen(true)}
         showMenuButton={true}
-      /> */}
+      />
 
       <div className="flex">
         {/* Mobile Sidebar Overlay */}
@@ -236,15 +237,15 @@ const MemberPortal: React.FC = () => {
                         </h2>
                         <div className="flex items-baseline">
                           <span className="text-4xl sm:text-5xl font-bold">
-                            {mappedMember.coinBalance}
+                            {mappedMember?.coinBalance}
                           </span>
                           <span className="text-lg sm:text-xl ml-2 text-success-100">
                             coins
                           </span>
                         </div>
                         <p className="text-success-100 mt-2 text-sm sm:text-base">
-                          Total earned: {mappedMember.totalCoinsEarned} • Total
-                          redeemed: {mappedMember.totalCoinsRedeemed}
+                          Total earned: {mappedMember?.totalCoinsEarned} • Total
+                          redeemed: {mappedMember?.totalCoinsRedeemed}
                         </p>
                       </div>
                       <div className="h-16 w-16 sm:h-24 sm:w-24 bg-white bg-opacity-20 rounded-full flex items-center justify-center ml-4">
